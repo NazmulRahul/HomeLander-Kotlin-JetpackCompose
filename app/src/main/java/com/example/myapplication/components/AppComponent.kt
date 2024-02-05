@@ -161,7 +161,5 @@ fun PasswordTextFieldComponent(
             }
         },
         visualTransformation=if(passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation()
-
-
     )
 }
