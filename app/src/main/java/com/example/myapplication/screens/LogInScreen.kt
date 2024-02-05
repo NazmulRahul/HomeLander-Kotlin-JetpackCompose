@@ -25,26 +25,18 @@ import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 
 @Composable
-fun SignUpScreen(){
-Surface(
-    color= Color.White,
-    modifier = Modifier
-        .fillMaxSize()
-        .padding(28.dp)
-        .background(Color.White)
+fun LogInScreen(){
+    Surface(
+        color= Color.White,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(28.dp)
+            .background(Color.White)
     ){
-        Column(modifier=Modifier.fillMaxSize()){
-            NormalComponent (value= stringResource(id = R.string.hello))
-            HeadingComponent(value = stringResource(id = R.string.create_account))
-            Spacer(modifier=Modifier.height(20.dp))
-            MyTextFieldComponent(
-                labelValue = stringResource(id = R.string.first_name),
-                painterResource(id = R.drawable.profile)
-            )
-            MyTextFieldComponent(
-                labelValue = stringResource(id = R.string.last_name),
-                painterResource(id = R.drawable.profile)
-            )
+        Column(modifier=Modifier.fillMaxSize()) {
+            NormalComponent(value = stringResource(id = R.string.hello))
+            HeadingComponent(value = stringResource(id = R.string.welcome))
+            Spacer(modifier = Modifier.height(20.dp))
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.email),
                 painterResource(id = R.drawable.message)
@@ -54,19 +46,16 @@ Surface(
                 painterResource(id = R.drawable.ic_lock)
             )
             Spacer(modifier=Modifier.height(60.dp))
-            ButtonComponent(value = stringResource(id = R.string.register))
+            ButtonComponent(value = stringResource(id = R.string.login))
             Spacer(modifier=Modifier.height(40.dp))
-            ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
-                AppRouter.navigateTo(Screen.LogInScreen)
+            ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
+                AppRouter.navigateTo(Screen.SignUpScreen)
             })
-
         }
-
     }
 }
-
 @Preview
 @Composable
-fun DefaultPreviewOfSignUpScreen(){
-    SignUpScreen()
+fun LoginScreenPreview(){
+    LogInScreen()
 }
