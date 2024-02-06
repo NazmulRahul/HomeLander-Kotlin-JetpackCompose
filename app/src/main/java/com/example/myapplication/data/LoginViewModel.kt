@@ -27,6 +27,11 @@ class LoginViewModel: ViewModel() {
                     lastName = event.password
                 )
             }
+            is UIEvent.RegisterButtonClicked->{
+                signUp()
+            }
         }
     }
+    private fun signUp(){}
+
 }

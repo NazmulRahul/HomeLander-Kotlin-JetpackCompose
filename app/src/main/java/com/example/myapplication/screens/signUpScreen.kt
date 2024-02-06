@@ -69,7 +69,9 @@ Surface(
                 }
             )
             Spacer(modifier=Modifier.height(60.dp))
-            ButtonComponent(value = stringResource(id = R.string.register))
+            ButtonComponent(value = stringResource(id = R.string.register), onButtonClicked = {
+                loginViewModel.onEvent(UIEvent.RegisterButtonClicked)
+            })
             Spacer(modifier=Modifier.height(40.dp))
             ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
                 AppRouter.navigateTo(Screen.LogInScreen)

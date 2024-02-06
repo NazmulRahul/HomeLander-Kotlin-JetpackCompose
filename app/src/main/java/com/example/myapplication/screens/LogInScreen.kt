@@ -53,7 +53,9 @@ fun LogInScreen(){
                 }
             )
             Spacer(modifier=Modifier.height(60.dp))
-            ButtonComponent(value = stringResource(id = R.string.login))
+            ButtonComponent(value = stringResource(id = R.string.login),onButtonClicked = {
+
+            })
             Spacer(modifier=Modifier.height(40.dp))
             ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
                 AppRouter.navigateTo(Screen.SignUpScreen)
