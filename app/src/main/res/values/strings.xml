@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginFlowApp</string>
+    <string name="app_name">HomeFinder</string>
     <string name="hello">Hey there, </string>
     <string name="create_account">Create an Account </string>
     <string name="welcome">Welcome Back</string>

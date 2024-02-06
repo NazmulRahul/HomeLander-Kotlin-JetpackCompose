@@ -23,6 +23,7 @@ import com.example.myapplication.components.NormalComponent
 import com.example.myapplication.components.PasswordTextFieldComponent
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
+import com.example.myapplication.navigation.SystemBackButtonHandler
 
 @Composable
 fun LogInScreen(){
@@ -39,11 +40,17 @@ fun LogInScreen(){
             Spacer(modifier = Modifier.height(20.dp))
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.email),
-                painterResource(id = R.drawable.message)
+                painterResource(id = R.drawable.message),
+                onTextSelected = {
+
+                }
             )
             PasswordTextFieldComponent(
                 labelValue = stringResource(id = R.string.password),
-                painterResource(id = R.drawable.ic_lock)
+                painterResource(id = R.drawable.ic_lock),
+                onTextSelected = {
+
+                }
             )
             Spacer(modifier=Modifier.height(60.dp))
             ButtonComponent(value = stringResource(id = R.string.login))
@@ -52,6 +59,9 @@ fun LogInScreen(){
                 AppRouter.navigateTo(Screen.SignUpScreen)
             })
         }
+    }
+    SystemBackButtonHandler {
+        AppRouter.navigateTo(Screen.SignUpScreen)
     }
 }
 @Preview

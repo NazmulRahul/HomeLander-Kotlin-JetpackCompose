@@ -91,7 +91,8 @@ fun HeadingComponent(value: String) {
 @Composable
 fun MyTextFieldComponent(
     labelValue: String,
-    painterResource:Painter
+    painterResource:Painter,
+    onTextSelected: (String) -> Unit
 ) {
 
     val textValue = remember {
@@ -117,6 +118,7 @@ fun MyTextFieldComponent(
         value = textValue.value,
         onValueChange = {
             textValue.value = it
+            onTextSelected(it)
         },
         leadingIcon={
             Icon(painter=painterResource, contentDescription = "")
@@ -129,7 +131,8 @@ fun MyTextFieldComponent(
 @Composable
 fun PasswordTextFieldComponent(
     labelValue: String,
-    painterResource:Painter
+    painterResource:Painter,
+    onTextSelected: (String) -> Unit
 ) {
 
     val password = remember {
@@ -158,6 +161,7 @@ fun PasswordTextFieldComponent(
         value = password.value,
         onValueChange = {
             password.value = it
+            onTextSelected(it)
         },
         leadingIcon={
             Icon(painter=painterResource, contentDescription = "")
