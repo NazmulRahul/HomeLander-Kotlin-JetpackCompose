@@ -188,7 +188,7 @@ fun PasswordTextFieldComponent(
 }
 
 @Composable
-fun ButtonComponent(value: String,isEnabled: Boolean = false,onButtonClicked:()->Unit
+fun ButtonComponent(value: String,onButtonClicked:()->Unit
 ) {
     Button(
         modifier = Modifier
@@ -199,8 +199,7 @@ fun ButtonComponent(value: String,isEnabled: Boolean = false,onButtonClicked:()-
         },
         contentPadding = PaddingValues(),
         colors = ButtonDefaults.buttonColors(Color.Transparent),
-        shape = RoundedCornerShape(50.dp),
-        enabled = isEnabled
+        shape = RoundedCornerShape(50.dp)
     ) {
         Box(
             modifier = Modifier
