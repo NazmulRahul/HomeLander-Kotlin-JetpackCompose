@@ -4,66 +4,45 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.navigation.AppRouter
+import com.example.myapplication.navigation.Screen
 import com.google.firebase.auth.FirebaseAuth
-
 class LoginViewModel: ViewModel() {
-    private val TAG = LoginViewModel::class.simpleName
-    var registrationUIState= mutableStateOf(RegistrationUIState())
-    fun onEvent(event:UIEvent){
-        when(event){
-            is UIEvent.FirstNameChanged->{
-                registrationUIState.value=registrationUIState.value.copy(
-                    firstName=event.firstName
+    private val TAG = SignupViewModel::class.simpleName
+    var loginUIState = mutableStateOf(LoginUIState())
+    fun onEvent(event:LoginUIEvent){
+        when(event) {
+            is LoginUIEvent.EmailChanged -> {
+                loginUIState.value=loginUIState.value.copy(
+                    email=event.email
                 )
-                printState()
+
             }
-            is UIEvent.LastNameChanged->{
-                registrationUIState.value=registrationUIState.value.copy(
-                    lastName = event.lastName
+            is LoginUIEvent.PasswordChanged->{
+                loginUIState.value=loginUIState.value.copy(
+                    password=event.password
                 )
-                printState()
             }
-            is UIEvent.EmailChanged->{
-                registrationUIState.value=registrationUIState.value.copy(
-                    email = event.email
-                )
-                printState()
-            }
-            is UIEvent.PasswordChanged->{
-                registrationUIState.value=registrationUIState.value.copy(
-                    password = event.password
-                )
-                printState()
-            }
-            is UIEvent.RegisterButtonClicked->{
-                signUp()
-                printState()
+            is LoginUIEvent.LoginButtonClicked->{
+                login()
             }
         }
     }
-    private fun signUp(){
-        Log.d(TAG, "Inside_signUp")
-        createUserInFirebase(email=registrationUIState.value.email,password=registrationUIState.value.password)
-    }
-    private fun createUserInFirebase(email:String,password:String){
+    private fun login(){
+        val email=loginUIState.value.email
+        val password=loginUIState.value.password
         FirebaseAuth
             .getInstance()
-            .createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                Log.d(TAG, "Inside_OnCompleteListener")
-                Log.d(TAG, " isSuccessful = ${it.isSuccessful}")
-
-
+            .signInWithEmailAndPassword(email,password)
+            .addOnCompleteListener{
+                Log.d(TAG,"Inside_login_Success")
+                Log.d(TAG,"&{it.isScuccessful}")
+                if(it.isSuccessful){
+                    AppRouter.navigateTo(Screen.HomeScreen)
+                }
             }
-            .addOnFailureListener {
-                Log.d(TAG, "Inside_OnFailureListener")
-                Log.d(TAG, "Exception= ${it.message}")
-                Log.d(TAG, "Exception= ${it.localizedMessage}")
+            .addOnFailureListener{
+
             }
     }
 
-    private fun printState(){
-        Log.d(TAG,"inside_printstate")
-        Log.d(TAG,registrationUIState.value.toString())
-    }
 }

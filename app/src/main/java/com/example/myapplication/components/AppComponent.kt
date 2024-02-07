@@ -258,7 +258,6 @@ fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (
                         onTextSelected(span.item)
                     }
                 }
-
         },
     )
 }
