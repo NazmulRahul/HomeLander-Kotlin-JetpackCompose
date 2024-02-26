@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.R
 import com.example.myapplication.components.ButtonComponent
 import com.example.myapplication.components.ClickableLoginTextComponent
@@ -21,11 +22,13 @@ import com.example.myapplication.components.HeadingComponent
 import com.example.myapplication.components.MyTextFieldComponent
 import com.example.myapplication.components.NormalComponent
 import com.example.myapplication.components.PasswordTextFieldComponent
+import com.example.myapplication.data.SignupViewModel
+import com.example.myapplication.data.SignupUIEvent
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(signupViewModel: SignupViewModel= viewModel()){
 Surface(
     color= Color.White,
     modifier = Modifier
@@ -39,22 +42,37 @@ Surface(
             Spacer(modifier=Modifier.height(20.dp))
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.first_name),
-                painterResource(id = R.drawable.profile)
+                painterResource(id = R.drawable.profile),
+                onTextSelected = {
+                    signupViewModel.onEvent(SignupUIEvent.FirstNameChanged(it))
+                }
             )
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.last_name),
-                painterResource(id = R.drawable.profile)
+                painterResource(id = R.drawable.profile),
+                onTextSelected = {
+                    signupViewModel.onEvent(SignupUIEvent.LastNameChanged(it))
+                }
             )
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.email),
-                painterResource(id = R.drawable.message)
+                painterResource(id = R.drawable.message),
+                onTextSelected = {
+                    signupViewModel.onEvent(SignupUIEvent.EmailChanged(it))
+                }
             )
             PasswordTextFieldComponent(
                 labelValue = stringResource(id = R.string.password),
-                painterResource(id = R.drawable.ic_lock)
+                painterResource(id = R.drawable.ic_lock),
+                onTextSelected = {
+                    signupViewModel.onEvent(SignupUIEvent.PasswordChanged(it))
+                }
             )
             Spacer(modifier=Modifier.height(60.dp))
-            ButtonComponent(value = stringResource(id = R.string.register))
+            ButtonComponent(value = stringResource(id = R.string.register), onButtonClicked = {
+                signupViewModel.onEvent(SignupUIEvent.RegisterButtonClicked)
+
+            })
             Spacer(modifier=Modifier.height(40.dp))
             ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
                 AppRouter.navigateTo(Screen.LogInScreen)

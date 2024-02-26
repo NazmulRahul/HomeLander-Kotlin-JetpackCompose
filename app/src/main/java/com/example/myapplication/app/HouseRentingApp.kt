@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
+import com.example.myapplication.screens.HomeScreen
 import com.example.myapplication.screens.LogInScreen
 import com.example.myapplication.screens.SignUpScreen
 
@@ -24,6 +25,9 @@ fun HouseRentingApp(){
                 }
                 is Screen.LogInScreen -> {
                     LogInScreen()
+                }
+                is Screen.HomeScreen->{
+                    HomeScreen()
                 }
             }
         }
