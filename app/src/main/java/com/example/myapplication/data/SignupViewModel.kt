@@ -76,6 +76,7 @@ class SignupViewModel: ViewModel() {
 
             }
         }
+        AppRouter.navigateTo(Screen.LogInScreen)
     }
 
     private fun printState(){
