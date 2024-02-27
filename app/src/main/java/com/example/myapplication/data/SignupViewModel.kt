@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 class SignupViewModel: ViewModel() {
     private val TAG = SignupViewModel::class.simpleName
     var registrationUIState= mutableStateOf(RegistrationUIState())
+    var loginUIState = mutableStateOf(LoginUIState())
     fun onEvent(event:SignupUIEvent){
         when(event){
             is SignupUIEvent.FirstNameChanged->{
@@ -43,6 +44,12 @@ class SignupViewModel: ViewModel() {
             }
             is SignupUIEvent.LogoutButtonClicked->{
                 logout()
+                loginUIState.value=loginUIState.value.copy(
+                    email=""
+                )
+                loginUIState.value=loginUIState.value.copy(
+                    password=""
+                )
             }
         }
     }
@@ -76,6 +83,7 @@ class SignupViewModel: ViewModel() {
 
             }
         }
+
         AppRouter.navigateTo(Screen.LogInScreen)
     }
 

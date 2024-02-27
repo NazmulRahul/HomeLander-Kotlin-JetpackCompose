@@ -25,7 +25,27 @@ class LoginViewModel: ViewModel() {
             is LoginUIEvent.LoginButtonClicked->{
                 login()
             }
+            is LoginUIEvent.LogoutButtonClicked->{
+                logout()
+                loginUIState.value=loginUIState.value.copy(
+                    email=""
+                )
+                loginUIState.value=loginUIState.value.copy(
+                    password=""
+                )
+            }
         }
+    }
+    fun logout(){
+        val firebaseAuth=FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        val authStateListener= FirebaseAuth.AuthStateListener {
+            if (it.currentUser == null) {
+
+            }
+        }
+
+        AppRouter.navigateTo(Screen.LogInScreen)
     }
     private fun login(){
         val email=loginUIState.value.email
@@ -35,7 +55,7 @@ class LoginViewModel: ViewModel() {
             .signInWithEmailAndPassword(email,password)
             .addOnCompleteListener{
                 Log.d(TAG,"Inside_login_Success")
-                Log.d(TAG,"&{it.isScuccessful}")
+                Log.d(TAG,"&{it.isSuccessful}")
                 if(it.isSuccessful){
                     AppRouter.navigateTo(Screen.HomeScreen)
                 }

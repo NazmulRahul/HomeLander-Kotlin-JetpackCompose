@@ -26,6 +26,7 @@ import com.example.myapplication.data.SignupViewModel
 import com.example.myapplication.data.SignupUIEvent
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
+import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @Composable
 fun SignUpScreen(signupViewModel: SignupViewModel= viewModel()){
@@ -86,5 +87,7 @@ Surface(
 @Preview
 @Composable
 fun DefaultPreviewOfSignUpScreen(){
-    SignUpScreen()
+    MyApplicationTheme(darkTheme = false){
+        SignUpScreen()
+    }
 }
