@@ -135,7 +135,7 @@ fun Upload(uri: Uri, context: Context,description:String,rent:String,address:Str
 //    val address=houseDataUiState.value.address
     val unique_image_name = UUID.randomUUID()
     val newHome = hashMapOf(
-        "phone" to "$phone"
+        "phone" to "$phone",
         "description" to "$description",
         "address" to "$address",
         "rent" to "$rent",
