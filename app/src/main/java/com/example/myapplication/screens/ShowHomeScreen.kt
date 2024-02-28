@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.myapplication.data.DataViewModel
-import com.example.myapplication.navigation.Screen
+
 
 @Composable
 fun ShowHomeScreen(dataViewModel: DataViewModel =viewModel(), modifier:Modifier=Modifier){
