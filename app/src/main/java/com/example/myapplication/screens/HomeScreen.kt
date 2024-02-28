@@ -30,6 +30,7 @@ import com.example.myapplication.data.LoginUIEvent
 import com.example.myapplication.data.LoginViewModel
 import com.example.myapplication.data.SignupViewModel
 import com.example.myapplication.data.SignupUIEvent
+import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 
 @Composable
@@ -61,12 +62,12 @@ fun HomeScreen(loginViewModel: LoginViewModel= viewModel()){
             })
             Spacer(modifier=Modifier.height(20.dp))
             ButtonComponent(value = "Browse Home", onButtonClicked = {
-
+                AppRouter.navigateTo(Screen.ShowHomeScreen)
             })
             Spacer(modifier=Modifier.height(20.dp))
 
             ButtonComponent(value = "Add Home", onButtonClicked = {
-
+                AppRouter.navigateTo(Screen.UploadScreen)
             })
             Spacer(modifier=Modifier.height(60.dp))
             SmallButtonComponent(value = "Logout", onButtonClicked = {

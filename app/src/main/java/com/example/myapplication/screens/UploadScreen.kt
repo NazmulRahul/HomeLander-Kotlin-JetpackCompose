@@ -32,6 +32,7 @@ import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
+import com.example.myapplication.navigation.SystemBackButtonHandler
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.StorageReference
@@ -143,6 +144,9 @@ fun UploadScreen(modifier:Modifier=Modifier){
 //            uploadViewModel.onEvent(HouseDataUiEvent.UploadButtonClicked)
 //
 //        })
+    }
+    SystemBackButtonHandler {
+        AppRouter.navigateTo(Screen.HomeScreen)
     }
 }
 fun Upload(uri: Uri, context: Context,description:String,rent:String,address:String){
