@@ -14,7 +14,6 @@ import com.example.myapplication.screens.ShowHomeScreen
 import com.example.myapplication.screens.SignUpScreen
 import com.example.myapplication.screens.UploadScreen
 
-
 @Composable
 fun HouseRentingApp(){
     Surface(

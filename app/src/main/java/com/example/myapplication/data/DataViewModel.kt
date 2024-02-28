@@ -1,5 +1,4 @@
 package com.example.myapplication.data
-
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -30,7 +29,7 @@ suspend fun getDataFromFirestore(): MutableList<AboutHome> {
         db.collection("house")
             .get()
             .await().map{
-               Log.d("hello","$it")
+                Log.d("hello","$it")
                 val result= it.toObject(AboutHome::class.java)
                 aboutList.add(result)
             }

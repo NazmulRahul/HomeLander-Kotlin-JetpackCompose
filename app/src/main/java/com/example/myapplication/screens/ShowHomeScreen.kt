@@ -14,14 +14,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.myapplication.data.DataViewModel
+import com.example.myapplication.navigation.AppRouter
+import com.example.myapplication.navigation.Screen
+import com.example.myapplication.navigation.SystemBackButtonHandler
 
 
 @Composable
 fun ShowHomeScreen(dataViewModel: DataViewModel =viewModel(), modifier:Modifier=Modifier){
-      val getData=dataViewModel.stateList.value
+    val getData=dataViewModel.stateList.value
     LazyColumn(modifier = modifier.fillMaxWidth()){
         items(getData){
-            item->
+                item->
             Log.d("hello","$item.last")
             Card(modifier = modifier.fillMaxWidth().padding(20.dp)){
                 AsyncImage(
@@ -37,6 +40,7 @@ fun ShowHomeScreen(dataViewModel: DataViewModel =viewModel(), modifier:Modifier=
             }
         }
     }
+    SystemBackButtonHandler {
+        AppRouter.navigateTo(Screen.HomeScreen)
+    }
 }
-
-

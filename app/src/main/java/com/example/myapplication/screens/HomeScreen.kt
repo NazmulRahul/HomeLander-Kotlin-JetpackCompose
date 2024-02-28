@@ -1,35 +1,77 @@
 package com.example.myapplication.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.R
 import com.example.myapplication.components.ButtonComponent
 import com.example.myapplication.components.HeadingComponent
+import com.example.myapplication.components.SmallButtonComponent
+import com.example.myapplication.data.LoginUIEvent
+import com.example.myapplication.data.LoginViewModel
 import com.example.myapplication.data.SignupViewModel
 import com.example.myapplication.data.SignupUIEvent
+import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 
 @Composable
-fun HomeScreen(signupViewModel: SignupViewModel = viewModel()){
+fun HomeScreen(loginViewModel: LoginViewModel= viewModel()){
     Surface(
         color= Color.White,
         modifier = Modifier
             .fillMaxSize()
-            .padding(28.dp)
             .background(Color.White)
     ){
-        Column(modifier=Modifier.fillMaxSize()){
-            HeadingComponent(value = "HOME SCREEN")
-            ButtonComponent(value = "Logout", onButtonClicked = {
-                signupViewModel.onEvent(SignupUIEvent.LogoutButtonClicked)
+        Box(modifier=Modifier.fillMaxSize()){
+
+    }
+        Column(modifier= Modifier
+            .fillMaxSize()
+            .padding(28.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+
+        ){
+            Image(
+                painter= painterResource(id = R.drawable.house_logo_png_21),
+                contentDescription=""
+            )
+//            HeadingComponent(value = "HOME SCREEN")
+            Spacer(modifier=Modifier.height(60.dp))
+            ButtonComponent(value = "MyProfile", onButtonClicked = {
+                loginViewModel.onEvent(LoginUIEvent.LogoutButtonClicked)
+            })
+            Spacer(modifier=Modifier.height(20.dp))
+            ButtonComponent(value = "Browse Home", onButtonClicked = {
+                AppRouter.navigateTo(Screen.ShowHomeScreen)
+            })
+            Spacer(modifier=Modifier.height(20.dp))
+
+            ButtonComponent(value = "Add Home", onButtonClicked = {
+                AppRouter.navigateTo(Screen.UploadScreen)
+            })
+            Spacer(modifier=Modifier.height(60.dp))
+            SmallButtonComponent(value = "Logout", onButtonClicked = {
+                loginViewModel.onEvent(LoginUIEvent.LogoutButtonClicked)
             })
         }
     }
@@ -37,6 +79,6 @@ fun HomeScreen(signupViewModel: SignupViewModel = viewModel()){
 
 @Preview
 @Composable
-fun showHomeScreen(){
+fun HomeScreenPreview(){
     HomeScreen()
 }
