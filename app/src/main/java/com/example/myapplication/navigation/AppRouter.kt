@@ -8,6 +8,8 @@ sealed class Screen {
     object SignUpScreen : Screen()
     object LogInScreen: Screen()
     object HomeScreen:Screen()
+    object ShowHomeScreen:Screen()
+    object UploadScreen:Screen()
 }
 
 object AppRouter {
