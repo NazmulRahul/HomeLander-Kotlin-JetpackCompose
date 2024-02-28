@@ -8,12 +8,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.components.ButtonComponent
 import com.example.myapplication.components.HeadingComponent
 import com.example.myapplication.data.SignupViewModel
 import com.example.myapplication.data.SignupUIEvent
+import com.example.myapplication.navigation.Screen
 
 @Composable
 fun HomeScreen(signupViewModel: SignupViewModel = viewModel()){
@@ -31,4 +33,10 @@ fun HomeScreen(signupViewModel: SignupViewModel = viewModel()){
             })
         }
     }
+}
+
+@Preview
+@Composable
+fun showHomeScreen(){
+    HomeScreen()
 }

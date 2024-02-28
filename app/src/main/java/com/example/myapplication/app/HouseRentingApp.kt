@@ -35,7 +35,7 @@ fun HouseRentingApp(){
                 is Screen.ShowHomeScreen->{
                     ShowHomeScreen()
                 }
-                is Screen.ShowHomeScreen->{
+                is Screen.UploadScreen->{
                     UploadScreen()
                 }
             }
