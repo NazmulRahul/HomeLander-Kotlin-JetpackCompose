@@ -134,7 +134,8 @@ fun ApartmentItem(
                 ApartmentDetails(
                     name = homeDetails.description,
                     description = homeDetails.address,
-                    trainer = homeDetails.rent
+                    trainer = homeDetails.rent,
+                    phone=homeDetails.phone
                 )
             }
         }
@@ -164,6 +165,7 @@ fun ApartmentDetails(
     name: String,
     description: String,
     trainer: String,
+    phone:String,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
@@ -182,6 +184,11 @@ fun ApartmentDetails(
         DescriptionRow(
             heading = "Rent:",
             details = trainer,
+            modifier = Modifier.weight(0.5f)
+        )
+        DescriptionRow(
+            heading = "Phone:",
+            details = phone,
             modifier = Modifier.weight(0.5f)
         )
     }
