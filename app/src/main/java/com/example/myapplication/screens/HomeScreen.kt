@@ -32,6 +32,7 @@ import com.example.myapplication.data.SignupViewModel
 import com.example.myapplication.data.SignupUIEvent
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
+import com.example.myapplication.navigation.SystemBackButtonHandler
 
 @Composable
 fun HomeScreen(loginViewModel: LoginViewModel= viewModel()){
@@ -74,6 +75,9 @@ fun HomeScreen(loginViewModel: LoginViewModel= viewModel()){
                 loginViewModel.onEvent(LoginUIEvent.LogoutButtonClicked)
             })
         }
+    }
+    SystemBackButtonHandler {
+        AppRouter.navigateTo(Screen.LogInScreen)
     }
 }
 
