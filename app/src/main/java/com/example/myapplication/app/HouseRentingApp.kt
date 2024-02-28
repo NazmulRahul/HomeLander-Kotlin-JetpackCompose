@@ -10,7 +10,10 @@ import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 import com.example.myapplication.screens.HomeScreen
 import com.example.myapplication.screens.LogInScreen
+import com.example.myapplication.screens.ShowHomeScreen
 import com.example.myapplication.screens.SignUpScreen
+import com.example.myapplication.screens.UploadScreen
+
 
 @Composable
 fun HouseRentingApp(){
@@ -28,6 +31,12 @@ fun HouseRentingApp(){
                 }
                 is Screen.HomeScreen->{
                     HomeScreen()
+                }
+                is Screen.ShowHomeScreen->{
+                    ShowHomeScreen()
+                }
+                is Screen.ShowHomeScreen->{
+                    UploadScreen()
                 }
             }
         }
