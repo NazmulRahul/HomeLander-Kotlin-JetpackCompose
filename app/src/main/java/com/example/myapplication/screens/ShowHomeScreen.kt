@@ -8,16 +8,23 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.CloudUpload
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,11 +41,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
@@ -70,6 +78,7 @@ fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
     SystemBackButtonHandler {
         AppRouter.navigateTo(Screen.HomeScreen)
     }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,16 +86,32 @@ fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
 fun AppBar(modifier: Modifier) {
     CenterAlignedTopAppBar(
         title = {
+
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = stringResource(R.string.app_name),
-                    style = MaterialTheme.typography.displayMedium
-                )
+
+                IconButton(onClick = { AppRouter.navigateTo(Screen.UploadScreen)}) {
+                    Icon(Icons.Filled.CloudUpload, contentDescription = "Upload",
+                        Modifier.size(60.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(60.dp))
+                IconButton(onClick = { AppRouter.navigateTo(Screen.HomeScreen) }) {
+                    Icon(Icons.Filled.Home, contentDescription = "Home",
+                        Modifier.size(60.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(60.dp))
+                IconButton(onClick = { AppRouter.navigateTo(Screen.LogInScreen) }) {
+                    Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = "Logout",
+                        Modifier.size(60.dp)
+                    )
+                }
             }
         },
-        modifier = modifier
+        modifier = modifier.background(Color.Cyan)
     )
 }
 
@@ -111,17 +136,21 @@ fun ApartmentItem(
                         stiffness = Spring.StiffnessMedium
                     )
                 )
-                .background(color = color)
+                .background(color =Color.LightGray)
                 .fillMaxWidth()
         ) {
             AsyncImage(
                 model = homeDetails.image,
                 contentDescription = null,
                 modifier = modifier
-                    .size(400.dp)
                     .padding(8.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Fit
+                    .clip(RoundedCornerShape(16.dp))
+                    .size(400.dp)
+            )
+            Text(
+                text="Price: ${homeDetails.rent}",
+                style=MaterialTheme.typography.bodyLarge,
+                color=Color.DarkGray
             )
 
 //            Spacer(modifier = modifier.weight(1f))
@@ -171,19 +200,19 @@ fun ApartmentDetails(
 ) {
     Column(modifier = modifier.padding(10.dp)) {
         DescriptionRow(
-            heading = "Description",
+            heading = "Description: ",
             details = name,
             modifier = Modifier.weight(2f)
         )
 
         DescriptionRow(
-            heading = "Address:",
+            heading = "Address: ",
             details = description,
             modifier = Modifier.weight(2f)
         )
 
         DescriptionRow(
-            heading = "Rent:",
+            heading = "Price: ",
             details = trainer,
             modifier = Modifier.weight(2f)
         )
@@ -204,12 +233,14 @@ fun DescriptionRow(
     Row {
         Text(
             text = heading,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.bodyLarge
         )
 
         //Spacer(modifier = modifier)
 
-        Text(text = details)
+        Text(text = details,
+            style = MaterialTheme.typography.bodyLarge)
     }
 }
 

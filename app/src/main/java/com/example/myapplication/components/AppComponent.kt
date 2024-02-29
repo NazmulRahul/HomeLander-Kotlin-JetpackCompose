@@ -19,9 +19,11 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -66,11 +68,8 @@ fun NormalComponent(value: String) {
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 40.dp),
-        style = androidx.compose.ui.text.TextStyle(
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Normal,
-            fontStyle = FontStyle.Normal
-        ), color = colorResource(id =R.color.colorText),
+        style =MaterialTheme.typography.titleLarge ,
+        color = colorResource(id =R.color.colorText),
         textAlign = TextAlign.Center
     )
 }
@@ -81,11 +80,8 @@ fun HeadingComponent(value: String) {
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(),
-        style = androidx.compose.ui.text.TextStyle(
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Normal
-        ), color = colorResource(id =R.color.colorText),
+        style = MaterialTheme.typography.headlineLarge,
+        color = colorResource(id =R.color.colorText),
         textAlign = TextAlign.Center
     )
 }
@@ -201,7 +197,11 @@ fun ButtonComponent(value: String,onButtonClicked:()->Unit
         },
         contentPadding = PaddingValues(),
         colors = ButtonDefaults.buttonColors(Color.Transparent),
-        shape = RoundedCornerShape(50.dp)
+        shape = RoundedCornerShape(50.dp),
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = 7.dp,
+            pressedElevation =15.dp
+        )
     ) {
         Box(
             modifier = Modifier

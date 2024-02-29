@@ -4,6 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.myapplication.app.HouseRentingApp
+import com.example.myapplication.screens.CenterAlignedTopAppBarExample
+import com.example.myapplication.screens.HomeScreen
+import com.example.myapplication.screens.LogInScreen
+import com.example.myapplication.screens.ShowHomeScreen
+import com.example.myapplication.screens.SignUpScreen
+import com.example.myapplication.screens.UploadScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -11,10 +17,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HouseRentingApp()
-//                SinglePhotoPicker()
-//            FinalPage()
-//    ShowHomeScreen()
-
+//    LogInScreen()
+//HomeScreen()
+//            CenterAlignedTopAppBarExample()
+//        SignUpScreen()
+//            ShowHomeScreen()
+//            UploadScreen()
         }
     }
 }

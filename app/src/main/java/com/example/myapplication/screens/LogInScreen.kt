@@ -1,14 +1,20 @@
 package com.example.myapplication.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,7 +35,7 @@ import com.example.myapplication.navigation.Screen
 import com.example.myapplication.navigation.SystemBackButtonHandler
 
 @Composable
-fun LogInScreen(loginViewModel: LoginViewModel= viewModel()){
+fun LogInScreen(loginViewModel: LoginViewModel= viewModel(),modifier:Modifier=Modifier){
     Surface(
         color= Color.White,
         modifier = Modifier
@@ -38,9 +44,17 @@ fun LogInScreen(loginViewModel: LoginViewModel= viewModel()){
             .background(Color.White)
     ){
         Column(modifier=Modifier.fillMaxSize()) {
-            NormalComponent(value = stringResource(id = R.string.hello))
-            HeadingComponent(value = stringResource(id = R.string.welcome))
-            Spacer(modifier = Modifier.height(20.dp))
+            Image(
+                painter= painterResource(id = R.drawable.logo1),
+                contentDescription = null,
+                modifier=Modifier
+                    .fillMaxWidth()
+                    . size(400.dp)
+                    .clip(CircleShape)
+            )
+//            NormalComponent(value = stringResource(id = R.string.hello))
+//            HeadingComponent(value = stringResource(id = R.string.welcome))
+//            Spacer(modifier = Modifier.height(20.dp))
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.email),
                 painterResource(id = R.drawable.message),

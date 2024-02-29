@@ -1,15 +1,18 @@
 package com.example.myapplication.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,9 +41,15 @@ Surface(
         .background(Color.White)
     ){
         Column(modifier=Modifier.fillMaxSize()){
+            Image(
+                painter= painterResource(id = R.drawable.logo1),
+                contentDescription = null,
+                modifier=Modifier.fillMaxWidth()
+            )
             NormalComponent (value= stringResource(id = R.string.hello))
             HeadingComponent(value = stringResource(id = R.string.create_account))
             Spacer(modifier=Modifier.height(20.dp))
+
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.first_name),
                 painterResource(id = R.drawable.profile),
