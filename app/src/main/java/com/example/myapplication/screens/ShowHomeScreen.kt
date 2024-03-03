@@ -121,7 +121,7 @@ fun ApartmentItem(
                     .size(400.dp)
                     .padding(8.dp)
                     .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Fit
             )
 
 //            Spacer(modifier = modifier.weight(1f))
@@ -134,7 +134,9 @@ fun ApartmentItem(
                 ApartmentDetails(
                     name = homeDetails.description,
                     description = homeDetails.address,
-                    trainer = homeDetails.rent
+                    trainer = homeDetails.rent,
+                    phone=homeDetails.phone,
+                    modifier.padding(10.dp)
                 )
             }
         }
@@ -164,25 +166,31 @@ fun ApartmentDetails(
     name: String,
     description: String,
     trainer: String,
+    phone:String,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.padding(10.dp)) {
         DescriptionRow(
             heading = "Description",
             details = name,
-            modifier = Modifier.weight(0.5f)
+            modifier = Modifier.weight(2f)
         )
 
         DescriptionRow(
             heading = "Address:",
             details = description,
-            modifier = Modifier.weight(0.5f)
+            modifier = Modifier.weight(2f)
         )
 
         DescriptionRow(
             heading = "Rent:",
             details = trainer,
-            modifier = Modifier.weight(0.5f)
+            modifier = Modifier.weight(2f)
+        )
+        DescriptionRow(
+            heading = "Phone:",
+            details = phone,
+            modifier = Modifier.weight(2f)
         )
     }
 }

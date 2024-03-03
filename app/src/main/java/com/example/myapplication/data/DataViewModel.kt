@@ -11,7 +11,6 @@ import kotlinx.coroutines.tasks.await
 
 class DataViewModel:ViewModel(){
     var stateList= mutableStateOf(mutableListOf(AboutHome()))
-    var state= mutableStateOf(AboutHome())
     init{
         getData()
     }

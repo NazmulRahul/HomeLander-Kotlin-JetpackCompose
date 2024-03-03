@@ -62,7 +62,7 @@ fun UploadScreen(modifier:Modifier=Modifier){
         var description by remember { mutableStateOf("") }
         var address by remember { mutableStateOf("") }
         var rent by remember { mutableStateOf("") }
-
+        var phone by remember { mutableStateOf("") }
         Column(modifier.fillMaxSize()){
             OutlinedTextField(
                 value = description,
@@ -85,6 +85,13 @@ fun UploadScreen(modifier:Modifier=Modifier){
                 },
                 label = { Text(stringResource(id = R.string.Rent)) }
             )
+            OutlinedTextField(
+                value = phone,
+                onValueChange = { newValue ->
+                    phone = newValue
+                },
+                label = { Text("phone") }
+            )
             Spacer(modifier = Modifier.height(40.dp))
             Button(onClick = {
                 singlePhotoPicker.launch(
@@ -99,7 +106,7 @@ fun UploadScreen(modifier:Modifier=Modifier){
 
             Button(onClick = {
                 uri?.let{
-                    Upload(uri=it, context=context,description,rent,address)
+                    Upload(uri=it, context=context,description,rent,address,phone)
                 }
 
             }){
@@ -117,44 +124,18 @@ fun UploadScreen(modifier:Modifier=Modifier){
 
         }
 
-//        MyTextFieldComponent(
-//            labelValue = stringResource(id = R.string.Description),
-//            painterResource(id =NULL),
-//            onTextSelected = {
-//                uploadViewModel.onEvent(HouseDataUiEvent.DescriptionChanged(it))
-//            }
-//        )
-//        MyTextFieldComponent(
-//            labelValue = stringResource(id = R.string.Address),
-//            painterResource(id =NULL),
-//            onTextSelected = {
-//                uploadViewModel.onEvent(HouseDataUiEvent.AddressChanged(it))
-//            }
-//        )
-//        MyTextFieldComponent(
-//            labelValue = stringResource(id = R.string.Rent),
-//            painterResource(id =NULL),
-//            onTextSelected = {
-//                uploadViewModel.onEvent(HouseDataUiEvent.RentChanged(it))
-//            }
-//        )
-//
-//        Spacer(modifier = Modifier.height(40.dp))
-//        ButtonComponent(value = stringResource(id = R.string.Upload), onButtonClicked = {
-//            uploadViewModel.onEvent(HouseDataUiEvent.UploadButtonClicked)
-//
-//        })
     }
     SystemBackButtonHandler {
         AppRouter.navigateTo(Screen.HomeScreen)
     }
 }
-fun Upload(uri: Uri, context: Context,description:String,rent:String,address:String){
+fun Upload(uri: Uri, context: Context,description:String,rent:String,address:String,phone:String){
 //    val description=houseDataUiState.value.description
 //    val rent=houseDataUiState.value.rent
 //    val address=houseDataUiState.value.address
     val unique_image_name = UUID.randomUUID()
     val newHome = hashMapOf(
+        "phone" to "$phone",
         "description" to "$description",
         "address" to "$address",
         "rent" to "$rent",
