@@ -45,7 +45,7 @@ fun LogInScreen(loginViewModel: LoginViewModel= viewModel(),modifier:Modifier=Mo
     ){
         Column(modifier=Modifier.fillMaxSize()) {
             Image(
-                painter= painterResource(id = R.drawable.logo1),
+                painter= painterResource(id = R.drawable.icon),
                 contentDescription = null,
                 modifier=Modifier
                     .fillMaxWidth()

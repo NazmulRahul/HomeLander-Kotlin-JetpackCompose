@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,12 +27,14 @@ import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -61,23 +64,32 @@ import com.example.myapplication.navigation.SystemBackButtonHandler
 @Composable
 fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
     val getData=dataViewModel.stateList.value
-    Scaffold(
-        topBar = {
-            AppBar(modifier = Modifier)
-        }
-    ) { it ->
-        LazyColumn(contentPadding = it) {
-            items(getData) {
-                ApartmentItem(
-                    homeDetails = it,
-                    modifier = Modifier.padding(8.dp)
-                )
+    Surface(
+        color= Color.White,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color(0xffa6a6a6))
+    ){
+        Scaffold(
+            topBar = {
+                AppBar(modifier = Modifier)
+            },
+
+        ) { it ->
+            LazyColumn(contentPadding = it,modifier=Modifier.background(color = Color(0xfff2f2f2))) {
+                items(getData) {
+                    ApartmentItem(
+                        homeDetails = it,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
             }
         }
+        SystemBackButtonHandler {
+            AppRouter.navigateTo(Screen.HomeScreen)
+        }
     }
-    SystemBackButtonHandler {
-        AppRouter.navigateTo(Screen.HomeScreen)
-    }
+
 
 }
 
@@ -126,7 +138,9 @@ fun ApartmentItem(
         else MaterialTheme.colorScheme.primaryContainer,
         label = ""
     )
-    Card(modifier = modifier.fillMaxWidth()) {
+    Card(modifier = modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(
+        defaultElevation = 10.dp
+    )) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -136,8 +150,9 @@ fun ApartmentItem(
                         stiffness = Spring.StiffnessMedium
                     )
                 )
-                .background(color =Color.LightGray)
-                .fillMaxWidth()
+                .background(color = Color.White)
+                .fillMaxWidth(),
+
         ) {
             AsyncImage(
                 model = homeDetails.image,
@@ -146,6 +161,7 @@ fun ApartmentItem(
                     .padding(8.dp)
                     .clip(RoundedCornerShape(16.dp))
                     .size(400.dp)
+                    .fillMaxSize()
             )
             Text(
                 text="Price: ${homeDetails.rent}",
@@ -165,7 +181,7 @@ fun ApartmentItem(
                     description = homeDetails.address,
                     trainer = homeDetails.rent,
                     phone=homeDetails.phone,
-                    modifier.padding(10.dp)
+                    modifier.padding(0.dp)
                 )
             }
         }
@@ -230,7 +246,7 @@ fun DescriptionRow(
     details: String,
     modifier: Modifier = Modifier
 ) {
-    Row {
+    Column {
         Text(
             text = heading,
             fontWeight = FontWeight.Bold,
