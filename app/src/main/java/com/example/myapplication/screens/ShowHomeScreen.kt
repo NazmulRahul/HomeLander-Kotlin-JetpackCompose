@@ -64,12 +64,6 @@ import com.example.myapplication.navigation.SystemBackButtonHandler
 @Composable
 fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
     val getData=dataViewModel.stateList.value
-    Surface(
-        color= Color.White,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color(0xffa6a6a6))
-    ){
         Scaffold(
             topBar = {
                 AppBar(modifier = Modifier)
@@ -88,8 +82,6 @@ fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
         SystemBackButtonHandler {
             AppRouter.navigateTo(Screen.HomeScreen)
         }
-    }
-
 
 }
 
