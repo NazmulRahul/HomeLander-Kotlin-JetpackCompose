@@ -19,7 +19,7 @@ import com.example.myapplication.data.ProfileViewModel
 
 
 @Composable
-fun Profil(loginViewModel: LoginViewModel= viewModel(), profileViewModel: ProfileViewModel=viewModel()){
+fun Profile(loginViewModel: LoginViewModel= viewModel(), profileViewModel: ProfileViewModel=viewModel()){
     val email=loginViewModel.loginUIState.value.email
     val profiles=profileViewModel.stateList
     var profile= mutableStateOf(ProfileUiState())
