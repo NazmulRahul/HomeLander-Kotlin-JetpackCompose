@@ -57,7 +57,7 @@ class LoginViewModel: ViewModel() {
                 Log.d(TAG,"Inside_login_Success")
                 Log.d(TAG,"&{it.isSuccessful}")
                 if(it.isSuccessful){
-                    AppRouter.navigateTo(Screen.HomeScreen)
+                    AppRouter.navigateTo(Screen.LogInScreen)
                 }
             }
             .addOnFailureListener{

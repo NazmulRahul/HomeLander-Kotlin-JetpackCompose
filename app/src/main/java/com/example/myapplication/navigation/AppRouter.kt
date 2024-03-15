@@ -11,6 +11,7 @@ sealed class Screen {
     object ShowHomeScreen:Screen()
     object UploadScreen:Screen()
     object Welcome:Screen()
+    object Profile:Screen()
 }
 
 object AppRouter {
