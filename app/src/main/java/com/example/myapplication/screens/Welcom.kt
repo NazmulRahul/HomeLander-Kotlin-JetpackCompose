@@ -21,10 +21,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.R
+import com.example.myapplication.data.SignupViewModel
+import com.example.myapplication.navigation.AppRouter
+import com.example.myapplication.navigation.Screen
+import com.example.myapplication.navigation.SystemBackButtonHandler
 
 @Composable
-fun Welcome() {
+fun Welcome(signupViewModel: SignupViewModel= viewModel()) {
     Surface(
         color= Color.White,
         modifier = Modifier
@@ -39,6 +44,12 @@ fun Welcome() {
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier.fillMaxSize()
             )
+            Text(text=signupViewModel.registrationUIState.value.email,
+                fontSize = 10.sp
+                )
+            SystemBackButtonHandler {
+                AppRouter.navigateTo(Screen.HomeScreen)
+            }
         }
     }
 

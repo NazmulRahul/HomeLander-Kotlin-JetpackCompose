@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import com.google.firebase.firestore.firestore
 
 class SignupViewModel: ViewModel() {
     private val TAG = SignupViewModel::class.simpleName
@@ -39,6 +41,20 @@ class SignupViewModel: ViewModel() {
                 printState()
             }
             is SignupUIEvent.RegisterButtonClicked->{
+                val db = Firebase.firestore
+                val newProfile = hashMapOf(
+                    "Fname" to registrationUIState.value.firstName,
+                    "Lname" to registrationUIState.value.lastName,
+                    "Email" to registrationUIState.value.email
+                )
+                db.collection("profile")
+                    .add(newProfile)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d("newHouseAdded", "DocumentSnapshot added with ID: ${documentReference.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("failedHouseAdded", "Error adding document", e)
+                    }
                 signUp()
                 printState()
             }
@@ -56,8 +72,11 @@ class SignupViewModel: ViewModel() {
     private fun signUp(){
         Log.d(TAG, "Inside_signUp")
         createUserInFirebase(email=registrationUIState.value.email,password=registrationUIState.value.password)
+
     }
     private fun createUserInFirebase(email:String,password:String){
+
+
         FirebaseAuth
             .getInstance()
             .createUserWithEmailAndPassword(email, password)

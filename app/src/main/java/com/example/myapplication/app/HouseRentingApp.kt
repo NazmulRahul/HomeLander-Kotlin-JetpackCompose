@@ -1,5 +1,6 @@
 package com.example.myapplication.app
 
+import Welcome
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
@@ -36,6 +37,9 @@ fun HouseRentingApp(){
                 }
                 is Screen.UploadScreen->{
                     UploadScreen()
+                }
+                is Screen.Welcome->{
+                    Welcome()
                 }
             }
         }

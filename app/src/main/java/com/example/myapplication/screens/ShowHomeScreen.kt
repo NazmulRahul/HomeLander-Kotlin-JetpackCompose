@@ -50,6 +50,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
@@ -64,7 +65,7 @@ import com.example.myapplication.navigation.SystemBackButtonHandler
 @Composable
 fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
     val getData=dataViewModel.stateList.value
-        Scaffold(
+    Scaffold(
             topBar = {
                 AppBar(modifier = Modifier)
             },
@@ -252,6 +253,12 @@ fun DescriptionRow(
     }
 }
 
+
+@Preview
+@Composable
+fun PreviewHome(){
+    ShowHomeScreen()
+}
 //@Preview
 //@Composable
 //fun PreviewCard(){
