@@ -47,9 +47,9 @@ fun Welcome(signupViewModel: SignupViewModel= viewModel()) {
             Text(text=signupViewModel.registrationUIState.value.email,
                 fontSize = 10.sp
                 )
-            SystemBackButtonHandler {
-                AppRouter.navigateTo(Screen.HomeScreen)
-            }
+//            SystemBackButtonHandler {
+//                AppRouter.navigateTo(Screen.HomeScreen)
+//            }
         }
     }
 
