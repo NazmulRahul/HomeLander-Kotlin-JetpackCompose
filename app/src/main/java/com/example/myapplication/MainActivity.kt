@@ -25,9 +25,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
                 ){
                     HouseRentingApp()
+//                    ShowHomeScreen()
                 }
 
             }

@@ -71,7 +71,7 @@ fun Profile(loginViewModel: LoginViewModel = viewModel(), profileViewModel: Prof
             modifier = Modifier.padding(it)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.icon),
+                painter = painterResource(id = R.drawable.profile2),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
