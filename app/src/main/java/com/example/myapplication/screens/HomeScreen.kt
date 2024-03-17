@@ -33,6 +33,7 @@ import com.example.myapplication.data.SignupUIEvent
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 import com.example.myapplication.navigation.SystemBackButtonHandler
+import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @Composable
 fun HomeScreen(loginViewModel: LoginViewModel= viewModel()){
@@ -59,7 +60,7 @@ fun HomeScreen(loginViewModel: LoginViewModel= viewModel()){
 //            HeadingComponent(value = "HOME SCREEN")
             Spacer(modifier=Modifier.height(60.dp))
             ButtonComponent(value = "MyProfile", onButtonClicked = {
-                loginViewModel.onEvent(LoginUIEvent.LogoutButtonClicked)
+                AppRouter.navigateTo(Screen.Profile)
             })
             Spacer(modifier=Modifier.height(20.dp))
             ButtonComponent(value = "Browse Home", onButtonClicked = {
@@ -71,18 +72,23 @@ fun HomeScreen(loginViewModel: LoginViewModel= viewModel()){
                 AppRouter.navigateTo(Screen.UploadScreen)
             })
             Spacer(modifier=Modifier.height(60.dp))
+            SmallButtonComponent(value = "Suggested", onButtonClicked = {
+                AppRouter.navigateTo(Screen.Suggested)
+            })
             SmallButtonComponent(value = "Logout", onButtonClicked = {
                 loginViewModel.onEvent(LoginUIEvent.LogoutButtonClicked)
             })
         }
     }
-    SystemBackButtonHandler {
-        AppRouter.navigateTo(Screen.LogInScreen)
-    }
+//    SystemBackButtonHandler {
+//        AppRouter.navigateTo(Screen.LogInScreen)
+//    }
 }
 
 @Preview
 @Composable
 fun HomeScreenPreview(){
-    HomeScreen()
+    MyApplicationTheme {
+        HomeScreen()
+    }
 }

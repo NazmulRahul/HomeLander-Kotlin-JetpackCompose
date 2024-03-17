@@ -54,11 +54,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.R
-import com.example.myapplication.ui.theme.BgColor
-import com.example.myapplication.ui.theme.Primary
-import com.example.myapplication.ui.theme.Secondary
-import com.example.myapplication.ui.theme.TextColor
 import com.example.myapplication.ui.theme.componentShapes
+import org.checkerframework.checker.units.qual.min
 import java.time.format.TextStyle
 
 @Composable
@@ -68,11 +65,12 @@ fun NormalComponent(value: String) {
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 40.dp),
-        style =MaterialTheme.typography.titleLarge ,
-        color = colorResource(id =R.color.colorText),
+        style = MaterialTheme.typography.titleLarge,
+//        color = colorResource(id =R.color.colorText),
         textAlign = TextAlign.Center
     )
 }
+
 @Composable
 fun HeadingComponent(value: String) {
     Text(
@@ -81,15 +79,16 @@ fun HeadingComponent(value: String) {
             .fillMaxWidth()
             .heightIn(),
         style = MaterialTheme.typography.headlineLarge,
-        color = colorResource(id =R.color.colorText),
+//        color = colorResource(id =R.color.colorText),
         textAlign = TextAlign.Center
     )
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTextFieldComponent(
     labelValue: String,
-    painterResource:Painter,
+    painterResource: Painter,
     onTextSelected: (String) -> Unit
 ) {
 
@@ -101,15 +100,16 @@ fun MyTextFieldComponent(
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(componentShapes.small)
-            ,
+            .padding(start = 8.dp, end = 8.dp)
+            .clip(componentShapes.small),
+
         label = { Text(text = labelValue) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Primary,
-            focusedLabelColor = Primary,
-            cursorColor = Primary,
-//            backgroundColor = BgColor
-        ),
+//        colors = TextFieldDefaults.outlinedTextFieldColors(
+////            focusedBorderColor = Primary,
+////            focusedLabelColor = Primary,
+////            cursorColor = Primary,
+////            backgroundColor = BgColor
+//        ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         singleLine = true,
         maxLines = 1,
@@ -118,8 +118,8 @@ fun MyTextFieldComponent(
             textValue.value = it
             onTextSelected(it)
         },
-        leadingIcon={
-            Icon(painter=painterResource, contentDescription = "")
+        leadingIcon = {
+            Icon(painter = painterResource, contentDescription = "")
         }
 
     )
@@ -129,14 +129,14 @@ fun MyTextFieldComponent(
 @Composable
 fun PasswordTextFieldComponent(
     labelValue: String,
-    painterResource:Painter,
+    painterResource: Painter,
     onTextSelected: (String) -> Unit
 ) {
 
     val password = remember {
         mutableStateOf("")
     }
-    val passwordVisible= remember {
+    val passwordVisible = remember {
         mutableStateOf(false)
     }
     val localFocusManager = LocalFocusManager.current
@@ -144,15 +144,15 @@ fun PasswordTextFieldComponent(
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(componentShapes.small)
-        ,
+            .padding(start = 8.dp, end = 8.dp)
+            .clip(componentShapes.small),
         label = { Text(text = labelValue) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Primary,
-            focusedLabelColor = Primary,
-            cursorColor = Primary,
-//            backgroundColor = BgColor
-        ),
+//        colors = TextFieldDefaults.outlinedTextFieldColors(
+////            focusedBorderColor = Primary,
+////            focusedLabelColor = Primary,
+////            cursorColor = Primary,
+////            backgroundColor = BgColor
+//        ),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         singleLine = true,
         maxLines = 1,
@@ -161,32 +161,33 @@ fun PasswordTextFieldComponent(
             password.value = it
             onTextSelected(it)
         },
-        leadingIcon={
-            Icon(painter=painterResource, contentDescription = "")
+        leadingIcon = {
+            Icon(painter = painterResource, contentDescription = "")
         },
         trailingIcon = {
-            val iconImage=if(passwordVisible.value){
+            val iconImage = if (passwordVisible.value) {
                 Icons.Filled.Visibility
-            }else{
+            } else {
                 Icons.Filled.VisibilityOff
             }
-            var description=if(passwordVisible.value){
+            var description = if (passwordVisible.value) {
                 stringResource(id = R.string.hide_password)
-            }else{
+            } else {
                 "show password"
             }
-            IconButton(onClick={
-                passwordVisible.value=!passwordVisible.value
+            IconButton(onClick = {
+                passwordVisible.value = !passwordVisible.value
             }) {
                 Icon(imageVector = iconImage, contentDescription = "")
             }
         },
-        visualTransformation=if(passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation()
+        visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation()
     )
 }
 
 @Composable
-fun ButtonComponent(value: String,onButtonClicked:()->Unit
+fun ButtonComponent(
+    value: String, onButtonClicked: () -> Unit
 ) {
     Button(
         modifier = Modifier
@@ -196,36 +197,25 @@ fun ButtonComponent(value: String,onButtonClicked:()->Unit
             onButtonClicked.invoke()
         },
         contentPadding = PaddingValues(),
-        colors = ButtonDefaults.buttonColors(Color.Transparent),
         shape = RoundedCornerShape(50.dp),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 7.dp,
-            pressedElevation =15.dp
+            pressedElevation = 15.dp
         )
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(48.dp)
-                .background(
-                    brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
-                    shape = RoundedCornerShape(50.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = value,
-                fontSize = 18.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Bold
-            )
+        Text(
+            text = value,
+            fontSize = 18.sp
+            //fontWeight = FontWeight.Bold
+        )
 
-        }
 
     }
 }
+
 @Composable
-fun SmallButtonComponent(value: String,onButtonClicked:()->Unit
+fun SmallButtonComponent(
+    value: String, onButtonClicked: () -> Unit
 ) {
     Button(
         modifier = Modifier
@@ -235,31 +225,20 @@ fun SmallButtonComponent(value: String,onButtonClicked:()->Unit
             onButtonClicked.invoke()
         },
         contentPadding = PaddingValues(),
-        colors = ButtonDefaults.buttonColors(Color.Transparent),
+//        colors = ButtonDefaults.buttonColors(Color.Transparent),
         shape = RoundedCornerShape(50.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .widthIn(100.dp)
-                .heightIn(48.dp)
-                .background(
-                    brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
-                    shape = RoundedCornerShape(10.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = value,
-                fontSize = 18.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Bold
-            )
 
-        }
+        Text(
+            text = value,
+            fontSize = 18.sp,
+            color = Color.White,
+            fontWeight = FontWeight.Bold
+        )
+
 
     }
 }
-
 
 
 @Composable
@@ -270,7 +249,7 @@ fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (
 
     val annotatedString = buildAnnotatedString {
         append(initialText)
-        withStyle(style = SpanStyle(color = Primary)) {
+        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
             pushStringAnnotation(tag = loginText, annotation = loginText)
             append(loginText)
         }
@@ -279,13 +258,10 @@ fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (
     ClickableText(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 40.dp),
-        style = androidx.compose.ui.text.TextStyle(
-            fontSize = 21.sp,
-            fontWeight = FontWeight.Normal,
-            fontStyle = FontStyle.Normal,
-            textAlign = TextAlign.Center
-        ),
+            .padding(start = 16.dp)
+        ,
+        //.heightIn(min = 40.dp),
+        style = MaterialTheme.typography.bodyLarge,
         text = annotatedString,
         onClick = { offset ->
 

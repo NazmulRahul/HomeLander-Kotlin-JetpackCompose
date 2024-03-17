@@ -4,8 +4,9 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,15 +18,24 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.LocationCity
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -33,8 +43,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,76 +55,149 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.example.myapplication.R
+import com.example.myapplication.components.MyTextFieldComponent
 import com.example.myapplication.data.AboutHome
 import com.example.myapplication.data.DataViewModel
+import com.example.myapplication.data.LoginUIEvent
+import com.example.myapplication.data.LoginViewModel
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 import com.example.myapplication.navigation.SystemBackButtonHandler
+import com.example.myapplication.ui.theme.componentShapes
 
 
 @Composable
 fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
     val getData=dataViewModel.stateList.value
+
+    var textFieldValue by remember {
+        mutableStateOf("")
+    }
+
     Scaffold(
             topBar = {
                 AppBar(modifier = Modifier)
             },
 
+
         ) { it ->
-            LazyColumn(contentPadding = it,modifier=Modifier.background(color = Color(0xfff2f2f2))) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+//            OutlinedTextField(
+//                value = textFieldValue,
+//                onValueChange = {textFieldValue = it},
+//                label = { Text(text = "Search")},
+//                leadingIcon = {
+//                    Icon(imageVector = Icons.Default.Search, contentDescription = null)
+//                },
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
+//            )
+            Spacer(modifier = Modifier.height(6.dp))
+            CardButtons()
+
+            LazyColumn(contentPadding = it,modifier=Modifier.background(color = Color(0xffFAFAFA))) {
+
+
                 items(getData) {
                     ApartmentItem(
-                        homeDetails = it,
-                        modifier = Modifier.padding(8.dp)
+                        homeDetails = it
+//                        modifier = Modifier.padding(10.dp)
                     )
                 }
             }
+
         }
-        SystemBackButtonHandler {
-            AppRouter.navigateTo(Screen.HomeScreen)
+
         }
+//        SystemBackButtonHandler {
+//            AppRouter.navigateTo(Screen.HomeScreen)
+//        }
 
 }
 
+@Composable
+fun CardButtons(){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
+            .background(Color.White),
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Nearby", imageVector = Icons.Default.LocationOn)
+        MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Add", imageVector = Icons.Default.Add)
+        MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Filter", imageVector = Icons.Default.FilterList)
+    }
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(modifier: Modifier) {
+fun MyCard(event:()->Unit,text:String, imageVector: ImageVector){
+    Card(
+        modifier = Modifier.clickable {  event.invoke()},
+        onClick={event.invoke()},
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White, //Card background color
+            contentColor = Color.Black  //Card content color,e.g.text
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp)
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.size(110.dp)
+        ) {
+            Text(text = text)
+            Icon(imageVector = imageVector, contentDescription = null)
+        }
+    }
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppBar(modifier: Modifier,loginViewModel: LoginViewModel=viewModel()) {
     CenterAlignedTopAppBar(
         title = {
+                Text(
+                    text = "HomeLander",
+                    style = MaterialTheme.typography.headlineLarge
+                )
+        },
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+        navigationIcon = {
+                         IconButton(onClick = { AppRouter.navigateTo(Screen.HomeScreen) }) {
+                             Icon(
+                                 imageVector = Icons.Default.Home,
+                                 contentDescription = null,
+                                 modifier = Modifier.size(28.dp)
+                             )
+                         }
+        },
 
-                IconButton(onClick = { AppRouter.navigateTo(Screen.UploadScreen)}) {
-                    Icon(Icons.Filled.CloudUpload, contentDescription = "Upload",
-                        Modifier.size(60.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(60.dp))
-                IconButton(onClick = { AppRouter.navigateTo(Screen.HomeScreen) }) {
-                    Icon(Icons.Filled.Home, contentDescription = "Home",
-                        Modifier.size(60.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.width(60.dp))
-                IconButton(onClick = { AppRouter.navigateTo(Screen.LogInScreen) }) {
-                    Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = "Logout",
-                        Modifier.size(60.dp)
-                    )
-                }
-            }
+        actions = {
+                  IconButton(onClick = {loginViewModel.onEvent(LoginUIEvent.LogoutButtonClicked)}) {
+                      Icon(
+                          imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                          contentDescription = null,
+                          modifier = Modifier.size(28.dp)
+                      )
+                  }
         },
         modifier = modifier.background(Color.Cyan)
     )
@@ -131,11 +214,14 @@ fun ApartmentItem(
         else MaterialTheme.colorScheme.primaryContainer,
         label = ""
     )
-    Card(modifier = modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(
-        defaultElevation = 10.dp
+    Card(modifier = modifier
+        .fillMaxWidth()
+        .padding(8.dp),shape = RoundedCornerShape(30.dp), elevation = CardDefaults.cardElevation(
+        defaultElevation = 6.dp
     )) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .animateContentSize(
                     animationSpec = spring(
@@ -150,17 +236,21 @@ fun ApartmentItem(
             AsyncImage(
                 model = homeDetails.image,
                 contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = modifier
                     .padding(8.dp)
                     .clip(RoundedCornerShape(16.dp))
                     .size(400.dp)
                     .fillMaxSize()
             )
-            Text(
-                text="Price: ${homeDetails.rent}",
-                style=MaterialTheme.typography.bodyLarge,
-                color=Color.DarkGray
-            )
+//            Text(
+//                text="Price: ${homeDetails.rent}",
+//                style=MaterialTheme.typography.bodyLarge,
+//                color=Color.DarkGray
+//            )
+            SingleDataRow(imageVector = null, description = "Nazmuler Bari")
+            SingleDataRow(imageVector = Icons.Default.LocationCity, description = "Nazmuler Heday")
+            DoubleDataRow(headingStart = "Rent: ", descFirst = "69Tk.", headingEnd = "Sq. Ft: ", descEnd = "6900")
 
 //            Spacer(modifier = modifier.weight(1f))
             ExpandedButton(
@@ -178,6 +268,55 @@ fun ApartmentItem(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun SingleDataRow(imageVector: ImageVector?, description: String){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, bottom = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        if(imageVector ==null){
+            Text(
+                text = description,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp
+            )
+        } else {
+            Icon(imageVector = imageVector, contentDescription = null)
+            Spacer(modifier = Modifier.width(4.dp))
+
+            Text(text = description)
+        }
+
+    }
+}
+
+@Composable
+fun DoubleDataRow(headingStart: String, descFirst:String, headingEnd:String, descEnd: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, bottom = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+//        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        showData(heading = headingStart, description = descFirst)
+        Spacer(modifier = Modifier.width(80.dp))
+        showData(heading = headingEnd, description = descEnd)
+    }
+}
+
+@Composable
+fun showData(
+    heading: String, description: String
+){
+    Row {
+        Text(text = heading, fontWeight = FontWeight.Bold)
+        Text(text = description)
     }
 }
 
