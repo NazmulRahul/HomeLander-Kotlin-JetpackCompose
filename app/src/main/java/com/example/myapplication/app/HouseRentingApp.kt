@@ -9,17 +9,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
+import com.example.myapplication.screens.FilterScreen
 import com.example.myapplication.screens.HomeScreen
 import com.example.myapplication.screens.LogInScreen
+import com.example.myapplication.screens.MyListings
+import com.example.myapplication.screens.Preference
+import com.example.myapplication.screens.Profile
 import com.example.myapplication.screens.ShowHomeScreen
 import com.example.myapplication.screens.SignUpScreen
+import com.example.myapplication.screens.Suggested
 import com.example.myapplication.screens.UploadScreen
+import java.util.logging.Filter
 
 @Composable
 fun HouseRentingApp(){
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color= Color.White
+        modifier = Modifier.fillMaxSize()
     ){
         Crossfade(targetState = AppRouter.currentScreen) { currentState ->
             when (currentState.value) {
@@ -40,6 +45,21 @@ fun HouseRentingApp(){
                 }
                 is Screen.Welcome->{
                     Welcome()
+                }
+                is Screen.Profile->{
+                    Profile()
+                }
+                is Screen.Preference->{
+                    Preference()
+                }
+                is Screen.Suggested->{
+                    Suggested()
+                }
+                is Screen.FilterScreen->{
+                    FilterScreen()
+                }
+                is Screen.MyListings->{
+                    MyListings()
                 }
             }
         }

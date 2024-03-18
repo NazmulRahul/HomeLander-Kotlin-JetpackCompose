@@ -33,23 +33,17 @@ import com.example.myapplication.data.LoginViewModel
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 import com.example.myapplication.navigation.SystemBackButtonHandler
+import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @Composable
 fun LogInScreen(loginViewModel: LoginViewModel= viewModel(),modifier:Modifier=Modifier){
-    Surface(
-        color= Color.White,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(28.dp)
-            .background(Color.White)
-    ){
-        Column(modifier=Modifier.fillMaxSize()) {
+    Column(modifier=Modifier.fillMaxSize()) {
             Image(
                 painter= painterResource(id = R.drawable.icon),
                 contentDescription = null,
-                modifier=Modifier
+                modifier= Modifier
                     .fillMaxWidth()
-                    . size(400.dp)
+                    .size(400.dp)
                     .clip(CircleShape)
             )
 //            NormalComponent(value = stringResource(id = R.string.hello))
@@ -73,18 +67,20 @@ fun LogInScreen(loginViewModel: LoginViewModel= viewModel(),modifier:Modifier=Mo
             ButtonComponent(value = stringResource(id = R.string.login),onButtonClicked = {
                 loginViewModel.onEvent(LoginUIEvent.LoginButtonClicked)
             })
-            Spacer(modifier=Modifier.height(40.dp))
+            Spacer(modifier=Modifier.height(12.dp))
             ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
                 AppRouter.navigateTo(Screen.SignUpScreen)
             })
         }
     }
-    SystemBackButtonHandler {
-        AppRouter.navigateTo(Screen.SignUpScreen)
-    }
-}
+//    SystemBackButtonHandler {
+//        AppRouter.navigateTo(Screen.SignUpScreen)
+//    }
+
 @Preview
 @Composable
 fun LoginScreenPreview(){
-    LogInScreen()
+    MyApplicationTheme {
+        LogInScreen()
+    }
 }
