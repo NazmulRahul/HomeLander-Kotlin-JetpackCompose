@@ -1,8 +1,9 @@
 package com.example.myapplication.data
 
 data class PreferenceUIState(
-    var rent:String ="",
-    var city:String="",
-    var sizeMin:String="",
-    var sizeMax:String=""
+    var minPrice:String="",
+    var maxPrice:String="",
+    var min_sqr_ft:String="",
+    var max_sqr_ft:String="",
+    var location:String=""
 )

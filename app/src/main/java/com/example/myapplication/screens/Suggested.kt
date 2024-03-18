@@ -13,20 +13,7 @@ import com.example.myapplication.navigation.SystemBackButtonHandler
 
 @Composable
 fun Suggested(preferenceViewModel: PreferenceViewModel=viewModel()){
-    Column {
-        Text(
-            text=preferenceViewModel.preferred.value.city,
-            fontSize = 20.sp
-        )
-        Text(
-            text=preferenceViewModel.preferred.value.rent,
-            fontSize = 20.sp
-        )
-        Text(
-            text=preferenceViewModel.preferred.value.sizeMax,
-            fontSize = 20.sp
-        )
-    }
+
     SystemBackButtonHandler {
         AppRouter.navigateTo(Screen.HomeScreen)
     }
