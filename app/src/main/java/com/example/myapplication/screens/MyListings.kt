@@ -27,8 +27,8 @@ fun MyListings(dataViewModel: DataViewModel=viewModel(),loginViewModel: LoginVie
     var myList=dataViewModel.stateList.value
     var newList=mutableListOf(AboutHome())
     for(l in myList){
-        Log.d("currEmail","$l.email")
-        if(l.email===loginViewModel.loginUIState.value.email){
+        Log.d("currEmail","${l.email}")
+        if(l.email==loginViewModel.loginUIState.value.email){
             newList.add(l)
         }
     }

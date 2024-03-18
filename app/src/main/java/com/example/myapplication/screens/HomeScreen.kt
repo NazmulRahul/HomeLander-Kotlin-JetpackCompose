@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.BrowseGallery
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Person
@@ -73,10 +74,10 @@ fun HomeScreen(loginViewModel: LoginViewModel=viewModel()){
         )
 
         CardStuff(
-            {AppRouter.navigateTo(Screen.FilterScreen)},
+            {AppRouter.navigateTo(Screen.MyListings)},
             {loginViewModel.onEvent(LoginUIEvent.LogoutButtonClicked)},
-            imageVectorStart = Icons.Default.Explore,
-            textStart = "Explore Nearby",
+            imageVectorStart = Icons.Default.Home,
+            textStart = "My Listings",
             imageVectorEnd = Icons.AutoMirrored.Filled.ExitToApp,
             textEnd="Logout"
 
