@@ -5,6 +5,7 @@ sealed class SignupUIEvent {
     data class LastNameChanged(val lastName:String):SignupUIEvent()
     data class EmailChanged(val email:String):SignupUIEvent()
     data class PasswordChanged(val password:String):SignupUIEvent()
+    data class LocationChanged(val location:String):SignupUIEvent()
     object RegisterButtonClicked:SignupUIEvent()
     object LogoutButtonClicked:SignupUIEvent()
 }

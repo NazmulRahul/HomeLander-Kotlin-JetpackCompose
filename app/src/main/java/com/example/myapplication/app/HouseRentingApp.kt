@@ -1,6 +1,7 @@
 package com.example.myapplication.app
 
 import Welcome
+import android.util.Log
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
@@ -10,9 +11,11 @@ import androidx.compose.ui.graphics.Color
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 import com.example.myapplication.screens.FilterScreen
+import com.example.myapplication.screens.FilteredScreen
 import com.example.myapplication.screens.HomeScreen
 import com.example.myapplication.screens.LogInScreen
 import com.example.myapplication.screens.MyListings
+import com.example.myapplication.screens.NearbyScreen
 import com.example.myapplication.screens.Preference
 import com.example.myapplication.screens.Profile
 import com.example.myapplication.screens.ShowHomeScreen
@@ -60,6 +63,12 @@ fun HouseRentingApp(){
                 }
                 is Screen.MyListings->{
                     MyListings()
+                }
+                is Screen.FilteredScreen->{
+                    FilteredScreen()
+                }
+                is Screen.NearbyScreen->{
+                    NearbyScreen()
                 }
             }
         }

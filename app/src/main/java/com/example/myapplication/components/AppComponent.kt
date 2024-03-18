@@ -191,7 +191,7 @@ fun ButtonComponent(
 ) {
     Button(
         modifier = Modifier
-            .fillMaxWidth()
+            .widthIn(140.dp)
             .heightIn(48.dp),
         onClick = {
             onButtonClicked.invoke()
@@ -244,7 +244,7 @@ fun SmallButtonComponent(
 @Composable
 fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (String) -> Unit) {
     val initialText =
-        if (tryingToLogin) "Already have an account? " else "Don’t have an account yet? "
+        if (tryingToLogin) "Already have an account? " else "Don't have an account? "
     val loginText = if (tryingToLogin) "Login" else "Register"
 
     val annotatedString = buildAnnotatedString {

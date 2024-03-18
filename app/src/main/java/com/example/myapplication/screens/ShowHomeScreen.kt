@@ -129,9 +129,9 @@ fun CardButtons(){
             .background(Color.White),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Nearby", imageVector = Icons.Default.LocationOn)
+        MyCard(event={AppRouter.navigateTo(Screen.NearbyScreen)},text = "Nearby", imageVector = Icons.Default.LocationOn)
         MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Add", imageVector = Icons.Default.Add)
-        MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Filter", imageVector = Icons.Default.FilterList)
+        MyCard(event={AppRouter.navigateTo(Screen.FilterScreen)},text = "Filter", imageVector = Icons.Default.FilterList)
     }
 }
 
@@ -240,7 +240,7 @@ fun ApartmentItem(
 //            )
             SingleDataRow(imageVector = null, description = homeDetails.title)
             SingleDataRow(imageVector = Icons.Default.LocationOn, description = homeDetails.city)
-            DoubleDataRow(headingStart = "Rent: ", descFirst = homeDetails.rent, headingEnd = "Sq. Ft: ", descEnd = homeDetails.sqr_ft)
+            DoubleDataRow(headingStart = "Price: ", descFirst = homeDetails.price, headingEnd = "Sq. Ft: ", descEnd = homeDetails.sqr_ft)
 
 //            Spacer(modifier = modifier.weight(1f))
             ExpandedButton(
@@ -353,7 +353,7 @@ fun ApartmentDetails(
         )
 
         DescriptionRow(
-            heading = "Rent: ",
+            heading = "Price: ",
             details = trainer,
             modifier = Modifier.weight(2f)
         )

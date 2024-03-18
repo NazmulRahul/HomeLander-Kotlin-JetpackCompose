@@ -7,9 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +35,9 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 @Composable
 fun SignUpScreen(signupViewModel: SignupViewModel= viewModel()){
         Column(
-            modifier=Modifier.fillMaxSize().padding(4.dp),
+            modifier= Modifier
+                .fillMaxSize()
+                .padding(4.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Image(
@@ -43,43 +49,61 @@ fun SignUpScreen(signupViewModel: SignupViewModel= viewModel()){
             HeadingComponent(value = stringResource(id = R.string.create_account))
             Spacer(modifier=Modifier.height(20.dp))
 
-            MyTextFieldComponent(
-                labelValue = stringResource(id = R.string.first_name),
-                painterResource(id = R.drawable.profile),
-                onTextSelected = {
-                    signupViewModel.onEvent(SignupUIEvent.FirstNameChanged(it))
-                }
-            )
-            MyTextFieldComponent(
-                labelValue = stringResource(id = R.string.last_name),
-                painterResource(id = R.drawable.profile),
-                onTextSelected = {
-                    signupViewModel.onEvent(SignupUIEvent.LastNameChanged(it))
-                }
-            )
-            MyTextFieldComponent(
-                labelValue = stringResource(id = R.string.email),
-                painterResource(id = R.drawable.message),
-                onTextSelected = {
-                    signupViewModel.onEvent(SignupUIEvent.EmailChanged(it))
-                }
-            )
-            PasswordTextFieldComponent(
-                labelValue = stringResource(id = R.string.password),
-                painterResource(id = R.drawable.ic_lock),
-                onTextSelected = {
-                    signupViewModel.onEvent(SignupUIEvent.PasswordChanged(it))
-                }
-            )
-            Spacer(modifier=Modifier.height(60.dp))
-            ButtonComponent(value = stringResource(id = R.string.register), onButtonClicked = {
-                signupViewModel.onEvent(SignupUIEvent.RegisterButtonClicked)
+            Card( modifier = Modifier.padding(15.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White, //Card background color
+                    contentColor = Color.Black  //Card content color,e.g.text
+                ),elevation = CardDefaults.cardElevation(
+                    defaultElevation = 6.dp)){
+                Column(Modifier.padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally){
+                    MyTextFieldComponent(
+                        labelValue = stringResource(id = R.string.first_name),
+                        painterResource(id = R.drawable.profile),
+                        onTextSelected = {
+                            signupViewModel.onEvent(SignupUIEvent.FirstNameChanged(it))
+                        }
+                    )
+                    MyTextFieldComponent(
+                        labelValue = stringResource(id = R.string.last_name),
+                        painterResource(id = R.drawable.profile),
+                        onTextSelected = {
+                            signupViewModel.onEvent(SignupUIEvent.LastNameChanged(it))
+                        }
+                    )
+                    MyTextFieldComponent(
+                        labelValue ="Location",
+                        painterResource(id = R.drawable.profile),
+                        onTextSelected = {
+                            signupViewModel.onEvent(SignupUIEvent.LocationChanged(it))
+                        }
+                    )
+                    MyTextFieldComponent(
+                        labelValue = stringResource(id = R.string.email),
+                        painterResource(id = R.drawable.message),
+                        onTextSelected = {
+                            signupViewModel.onEvent(SignupUIEvent.EmailChanged(it))
+                        }
+                    )
+                    PasswordTextFieldComponent(
+                        labelValue = stringResource(id = R.string.password),
+                        painterResource(id = R.drawable.ic_lock),
+                        onTextSelected = {
+                            signupViewModel.onEvent(SignupUIEvent.PasswordChanged(it))
+                        }
+                    )
+                    Spacer(modifier=Modifier.height(60.dp))
+                    ButtonComponent(value = stringResource(id = R.string.register), onButtonClicked = {
+                        signupViewModel.onEvent(SignupUIEvent.RegisterButtonClicked)
 
-            })
-            Spacer(modifier=Modifier.height(12.dp))
-            ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
-                AppRouter.navigateTo(Screen.LogInScreen)
-            })
+                    })
+                    Spacer(modifier=Modifier.height(12.dp))
+                    ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
+                        AppRouter.navigateTo(Screen.LogInScreen)
+                    })
+                    Spacer(modifier = Modifier.height(40.dp))
+                }
+            }
 
         }
 }

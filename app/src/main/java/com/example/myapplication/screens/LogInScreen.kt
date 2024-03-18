@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -46,31 +49,39 @@ fun LogInScreen(loginViewModel: LoginViewModel= viewModel(),modifier:Modifier=Mo
                     .size(400.dp)
                     .clip(CircleShape)
             )
-//            NormalComponent(value = stringResource(id = R.string.hello))
-//            HeadingComponent(value = stringResource(id = R.string.welcome))
-//            Spacer(modifier = Modifier.height(20.dp))
-            MyTextFieldComponent(
-                labelValue = stringResource(id = R.string.email),
-                painterResource(id = R.drawable.message),
-                onTextSelected = {
-                    loginViewModel.onEvent(LoginUIEvent.EmailChanged(it))
-                }
-            )
-            PasswordTextFieldComponent(
-                labelValue = stringResource(id = R.string.password),
-                painterResource(id = R.drawable.ic_lock),
-                onTextSelected = {
-                    loginViewModel.onEvent(LoginUIEvent.PasswordChanged(it))
-                }
-            )
-            Spacer(modifier=Modifier.height(60.dp))
-            ButtonComponent(value = stringResource(id = R.string.login),onButtonClicked = {
-                loginViewModel.onEvent(LoginUIEvent.LoginButtonClicked)
-            })
-            Spacer(modifier=Modifier.height(12.dp))
-            ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
-                AppRouter.navigateTo(Screen.SignUpScreen)
-            })
+       Card( modifier = Modifier.padding(15.dp),
+           colors = CardDefaults.cardColors(
+               containerColor = Color.White, //Card background color
+               contentColor = Color.Black  //Card content color,e.g.text
+           ),elevation = CardDefaults.cardElevation(
+               defaultElevation = 6.dp)){
+           Column(Modifier.padding(20.dp),
+               horizontalAlignment = Alignment.CenterHorizontally){
+               MyTextFieldComponent(
+                   labelValue = stringResource(id = R.string.email),
+                   painterResource(id = R.drawable.message),
+                   onTextSelected = {
+                       loginViewModel.onEvent(LoginUIEvent.EmailChanged(it))
+                   }
+               )
+               PasswordTextFieldComponent(
+                   labelValue = stringResource(id = R.string.password),
+                   painterResource(id = R.drawable.ic_lock),
+                   onTextSelected = {
+                       loginViewModel.onEvent(LoginUIEvent.PasswordChanged(it))
+                   }
+               )
+               Spacer(modifier=Modifier.height(60.dp))
+               ButtonComponent(value = stringResource(id = R.string.login),onButtonClicked = {
+                   loginViewModel.onEvent(LoginUIEvent.LoginButtonClicked)
+               })
+               Spacer(modifier=Modifier.height(12.dp))
+               ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
+                   AppRouter.navigateTo(Screen.SignUpScreen)
+               })
+
+           }
+        }
         }
     }
 //    SystemBackButtonHandler {
