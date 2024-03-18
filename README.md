@@ -1,2 +1,4 @@
 # HOMELANDER
-Android project 250
+An android app for selling and rentin properties with ease
+For project 250
+
