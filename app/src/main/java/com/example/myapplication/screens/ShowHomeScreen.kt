@@ -129,7 +129,7 @@ fun CardButtons(){
             .background(Color.White),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Nearby", imageVector = Icons.Default.LocationOn)
+        MyCard(event={AppRouter.navigateTo(Screen.NearbyScreen)},text = "Nearby", imageVector = Icons.Default.LocationOn)
         MyCard(event={AppRouter.navigateTo(Screen.UploadScreen)},text = "Add", imageVector = Icons.Default.Add)
         MyCard(event={AppRouter.navigateTo(Screen.FilterScreen)},text = "Filter", imageVector = Icons.Default.FilterList)
     }

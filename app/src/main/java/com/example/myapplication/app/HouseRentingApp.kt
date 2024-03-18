@@ -15,6 +15,7 @@ import com.example.myapplication.screens.FilteredScreen
 import com.example.myapplication.screens.HomeScreen
 import com.example.myapplication.screens.LogInScreen
 import com.example.myapplication.screens.MyListings
+import com.example.myapplication.screens.NearbyScreen
 import com.example.myapplication.screens.Preference
 import com.example.myapplication.screens.Profile
 import com.example.myapplication.screens.ShowHomeScreen
@@ -65,6 +66,9 @@ fun HouseRentingApp(){
                 }
                 is Screen.FilteredScreen->{
                     FilteredScreen()
+                }
+                is Screen.NearbyScreen->{
+                    NearbyScreen()
                 }
             }
         }

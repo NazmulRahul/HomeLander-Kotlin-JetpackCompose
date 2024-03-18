@@ -17,6 +17,7 @@ sealed class Screen {
     object Preference:Screen()
     object MyListings:Screen()
     object FilteredScreen:Screen()
+    object NearbyScreen:Screen()
 }
 
 object AppRouter {

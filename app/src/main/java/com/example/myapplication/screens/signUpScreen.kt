@@ -72,6 +72,13 @@ fun SignUpScreen(signupViewModel: SignupViewModel= viewModel()){
                         }
                     )
                     MyTextFieldComponent(
+                        labelValue ="Location",
+                        painterResource(id = R.drawable.profile),
+                        onTextSelected = {
+                            signupViewModel.onEvent(SignupUIEvent.LocationChanged(it))
+                        }
+                    )
+                    MyTextFieldComponent(
                         labelValue = stringResource(id = R.string.email),
                         painterResource(id = R.drawable.message),
                         onTextSelected = {

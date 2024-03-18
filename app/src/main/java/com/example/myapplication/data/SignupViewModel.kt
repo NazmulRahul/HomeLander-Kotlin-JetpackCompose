@@ -34,6 +34,12 @@ class SignupViewModel: ViewModel() {
                 )
                 printState()
             }
+            is SignupUIEvent.LocationChanged->{
+                registrationUIState.value=registrationUIState.value.copy(
+                    location = event.location
+                )
+                printState()
+            }
             is SignupUIEvent.PasswordChanged->{
                 registrationUIState.value=registrationUIState.value.copy(
                     password = event.password
@@ -45,6 +51,7 @@ class SignupViewModel: ViewModel() {
                 val newProfile = hashMapOf(
                     "Fname" to registrationUIState.value.firstName,
                     "Lname" to registrationUIState.value.lastName,
+                    "Location" to registrationUIState.value.location,
                     "Email" to registrationUIState.value.email
                 )
                 db.collection("profile")
@@ -84,7 +91,7 @@ class SignupViewModel: ViewModel() {
                 Log.d(TAG, "Inside_OnCompleteListener")
                 Log.d(TAG, " isSuccessful = ${it.isSuccessful}")
                 if(it.isSuccessful){
-                    AppRouter.navigateTo(Screen.HomeScreen)
+                    AppRouter.navigateTo(Screen.LogInScreen)
                 }
 
             }
