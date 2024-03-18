@@ -28,6 +28,6 @@ fun Suggested(preferenceViewModel: PreferenceViewModel=viewModel()){
         )
     }
     SystemBackButtonHandler {
-        AppRouter.navigateTo(Screen.Profile)
+        AppRouter.navigateTo(Screen.HomeScreen)
     }
 }
