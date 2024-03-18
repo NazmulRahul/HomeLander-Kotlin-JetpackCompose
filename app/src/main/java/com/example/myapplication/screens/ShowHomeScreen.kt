@@ -240,7 +240,7 @@ fun ApartmentItem(
 //            )
             SingleDataRow(imageVector = null, description = homeDetails.title)
             SingleDataRow(imageVector = Icons.Default.LocationOn, description = homeDetails.city)
-            DoubleDataRow(headingStart = "Rent: ", descFirst = homeDetails.rent, headingEnd = "Sq. Ft: ", descEnd = homeDetails.sqr_ft)
+            DoubleDataRow(headingStart = "Price: ", descFirst = homeDetails.price, headingEnd = "Sq. Ft: ", descEnd = homeDetails.sqr_ft)
 
 //            Spacer(modifier = modifier.weight(1f))
             ExpandedButton(
@@ -353,7 +353,7 @@ fun ApartmentDetails(
         )
 
         DescriptionRow(
-            heading = "Rent: ",
+            heading = "Price: ",
             details = trainer,
             modifier = Modifier.weight(2f)
         )

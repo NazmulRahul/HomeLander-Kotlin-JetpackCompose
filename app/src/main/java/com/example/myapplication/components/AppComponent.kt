@@ -191,7 +191,7 @@ fun ButtonComponent(
 ) {
     Button(
         modifier = Modifier
-            .fillMaxWidth()
+            .widthIn(140.dp)
             .heightIn(48.dp),
         onClick = {
             onButtonClicked.invoke()

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.BrowseGallery
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Favorite
@@ -66,11 +67,11 @@ fun HomeScreen(loginViewModel: LoginViewModel=viewModel()){
 
         CardStuff(
             {AppRouter.navigateTo(Screen.ShowHomeScreen)},
-            {AppRouter.navigateTo(Screen.FilterScreen)},
+            {AppRouter.navigateTo(Screen.UploadScreen)},
             imageVectorStart = Icons.Default.BrowseGallery,
             textStart = "Browse",
-            imageVectorEnd = Icons.Default.FilterList,
-            textEnd = "Filter"
+            imageVectorEnd = Icons.Default.Add,
+            textEnd = "Add"
         )
 
         CardStuff(

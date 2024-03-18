@@ -215,7 +215,7 @@ fun Upload(uri: Uri, context: Context,email:String,title:String,city:String,sqr_
         "phone" to "$phone",
         "description" to "$description",
         "address" to "$address",
-        "rent" to "$rent",
+        "price" to "$rent",
         "title" to "$title",
         "city" to "$city",
         "sqr_ft" to "$sqr_ft",

@@ -32,6 +32,7 @@ fun MyListings(dataViewModel: DataViewModel=viewModel(),loginViewModel: LoginVie
             newList.add(l)
         }
     }
+    var NewList=newList.filter{it.image.length>0}
     Scaffold(
         topBar = {
             AppBar(modifier = Modifier)
@@ -47,7 +48,7 @@ fun MyListings(dataViewModel: DataViewModel=viewModel(),loginViewModel: LoginVie
         ){
             Log.d("listings","$newList")
             LazyColumn(modifier=Modifier.background(color = Color(0xffFAFAFA))) {
-                items(newList) {
+                items(NewList) {
                     ApartmentItem(
                         homeDetails = it
 //                        modifier = Modifier.padding(10.dp)

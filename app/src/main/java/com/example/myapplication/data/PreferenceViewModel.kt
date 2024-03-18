@@ -20,6 +20,7 @@ class PreferenceViewModel:ViewModel() {
             preferred.value= getPreferredFromFirestore()
         }
     }
+
 }
 
 suspend fun getPreferredFromFirestore(): MutableList<PreferenceUIState> {
@@ -27,7 +28,7 @@ suspend fun getPreferredFromFirestore(): MutableList<PreferenceUIState> {
     var about= AboutHome()
     var aboutList= mutableListOf<PreferenceUIState>()
     try{
-        db.collection("house")
+        db.collection("Preference")
             .get()
             .await().map{
                 Log.d("hello","$it")
