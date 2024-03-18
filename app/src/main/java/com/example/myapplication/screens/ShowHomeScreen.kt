@@ -96,21 +96,11 @@ fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
                 .padding(it),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-//            OutlinedTextField(
-//                value = textFieldValue,
-//                onValueChange = {textFieldValue = it},
-//                label = { Text(text = "Search")},
-//                leadingIcon = {
-//                    Icon(imageVector = Icons.Default.Search, contentDescription = null)
-//                },
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
-//            )
+
             Spacer(modifier = Modifier.height(6.dp))
             CardButtons()
 
-            LazyColumn(contentPadding = it,modifier=Modifier.background(color = Color(0xffFAFAFA))) {
+            LazyColumn(modifier=Modifier.background(color = Color(0xffFAFAFA))) {
 
 
                 items(getData) {
@@ -124,9 +114,9 @@ fun ShowHomeScreen(dataViewModel: DataViewModel = viewModel()) {
         }
 
         }
-//        SystemBackButtonHandler {
-//            AppRouter.navigateTo(Screen.HomeScreen)
-//        }
+        SystemBackButtonHandler {
+            AppRouter.navigateTo(Screen.HomeScreen)
+        }
 
 }
 
@@ -248,9 +238,9 @@ fun ApartmentItem(
 //                style=MaterialTheme.typography.bodyLarge,
 //                color=Color.DarkGray
 //            )
-            SingleDataRow(imageVector = null, description = "Nazmuler Bari")
-            SingleDataRow(imageVector = Icons.Default.LocationCity, description = "Nazmuler Heday")
-            DoubleDataRow(headingStart = "Rent: ", descFirst = "69Tk.", headingEnd = "Sq. Ft: ", descEnd = "6900")
+            SingleDataRow(imageVector = null, description = homeDetails.title)
+            SingleDataRow(imageVector = Icons.Default.LocationOn, description = homeDetails.city)
+            DoubleDataRow(headingStart = "Rent: ", descFirst = homeDetails.rent, headingEnd = "Sq. Ft: ", descEnd = homeDetails.sqr_ft)
 
 //            Spacer(modifier = modifier.weight(1f))
             ExpandedButton(
@@ -262,7 +252,7 @@ fun ApartmentItem(
                 ApartmentDetails(
                     name = homeDetails.description,
                     description = homeDetails.address,
-                    trainer = homeDetails.rent,
+                    trainer = homeDetails.email,
                     phone=homeDetails.phone,
                     modifier.padding(0.dp)
                 )
@@ -289,7 +279,10 @@ fun SingleDataRow(imageVector: ImageVector?, description: String){
             Icon(imageVector = imageVector, contentDescription = null)
             Spacer(modifier = Modifier.width(4.dp))
 
-            Text(text = description)
+            Text(text = description,
+                color=Color(0xff2e8bc0),
+                fontWeight = FontWeight.Bold
+                )
         }
 
     }
@@ -360,7 +353,7 @@ fun ApartmentDetails(
         )
 
         DescriptionRow(
-            heading = "Price: ",
+            heading = "Rent: ",
             details = trainer,
             modifier = Modifier.weight(2f)
         )

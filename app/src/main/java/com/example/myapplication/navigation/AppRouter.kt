@@ -12,8 +12,10 @@ sealed class Screen {
     object UploadScreen:Screen()
     object Welcome:Screen()
     object Profile:Screen()
-    object Preference:Screen()
+    object FilterScreen:Screen()
     object Suggested:Screen()
+    object Preference:Screen()
+    object MyListings:Screen()
 }
 
 object AppRouter {

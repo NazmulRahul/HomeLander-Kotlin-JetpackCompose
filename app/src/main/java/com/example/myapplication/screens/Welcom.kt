@@ -30,28 +30,28 @@ import com.example.myapplication.navigation.SystemBackButtonHandler
 
 @Composable
 fun Welcome(signupViewModel: SignupViewModel= viewModel()) {
-    Surface(
-        color= Color.White,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(28.dp)
-            .background(Color.White)
-    ) {
-        Box(modifier=Modifier.fillMaxSize()){
-            Image(
-                painter= painterResource(id = R.drawable.bg),
-                contentDescription="",
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier.fillMaxSize()
-            )
-            Text(text=signupViewModel.registrationUIState.value.email,
-                fontSize = 10.sp
-                )
-//            SystemBackButtonHandler {
-//                AppRouter.navigateTo(Screen.HomeScreen)
-//            }
-        }
-    }
+//    Surface(
+//        color= Color.White,
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(28.dp)
+//            .background(Color.White)
+//    ) {
+//        Box(modifier=Modifier.fillMaxSize()){
+//            Image(
+//                painter= painterResource(id = R.drawable.bg),
+//                contentDescription="",
+//                contentScale = ContentScale.FillBounds,
+//                modifier = Modifier.fillMaxSize()
+//            )
+//            Text(text=signupViewModel.registrationUIState.value.email,
+//                fontSize = 10.sp
+//                )
+////            SystemBackButtonHandler {
+////                AppRouter.navigateTo(Screen.HomeScreen)
+////            }
+//        }
+//    }
 
 }
 @Preview

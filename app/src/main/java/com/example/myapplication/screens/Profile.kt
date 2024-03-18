@@ -128,18 +128,18 @@ fun CardStuffs() {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        MakeCards(text = "Preferences", imageVector = Icons.Default.Add)
+        MakeCards(event={AppRouter.navigateTo(Screen.Preference)},text = "Preferences", imageVector = Icons.Default.Add)
 //        Spacer(modifier = Modifier.width(20.dp))
-        MakeCards(text = "Listings", imageVector = Icons.Default.Home)
+        MakeCards(event={AppRouter.navigateTo(Screen.MyListings)},text = "Listings", imageVector = Icons.Default.Home)
     }
 }
 
 @Composable
-fun MakeCards(text:String, imageVector: ImageVector){
+fun MakeCards(event:()->Unit,text:String, imageVector: ImageVector){
     Card(
         modifier = Modifier
             .size(150.dp)
-            .clickable {AppRouter.navigateTo(Screen.Preference) }
+            .clickable {event.invoke() }
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
