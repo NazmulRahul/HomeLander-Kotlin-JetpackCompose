@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.myapplication.navigation.AppRouter
 import com.example.myapplication.navigation.Screen
 import com.example.myapplication.screens.FilterScreen
+import com.example.myapplication.screens.FilteredScreen
 import com.example.myapplication.screens.HomeScreen
 import com.example.myapplication.screens.LogInScreen
 import com.example.myapplication.screens.MyListings
@@ -61,6 +62,9 @@ fun HouseRentingApp(){
                 }
                 is Screen.MyListings->{
                     MyListings()
+                }
+                is Screen.FilteredScreen->{
+                    FilteredScreen()
                 }
             }
         }

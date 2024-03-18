@@ -79,16 +79,16 @@ fun FilterScreen(filteredDataViewModel: FilteredDataViewModel=viewModel()){
                         value = city,
                         onValueChange = { newValue ->
                             city= newValue
-                            filteredDataViewModel.filteredList.value.location=sizeMax
+                            filteredDataViewModel.filteredList.value.location=city
                         },
-                        label = { Text("Maximum size in sqft") }
+                        label = { Text("City") }
                     )
                     Spacer(Modifier.height(20.dp))
                     OutlinedTextField(
                         value =  sizeMin,
                         onValueChange = { newValue ->
                             sizeMin= newValue
-                            filteredDataViewModel.filteredList.value.min_sqr_ft=sizeMin
+                            filteredDataViewModel.filteredList.value.minSize=sizeMin
                         },
                         label = { Text("Minimum size in sqft") }
                     )
@@ -97,11 +97,11 @@ fun FilterScreen(filteredDataViewModel: FilteredDataViewModel=viewModel()){
                         value = sizeMax,
                         onValueChange = { newValue ->
                             sizeMax= newValue
-                            filteredDataViewModel.filteredList.value.max_sqr_ft=sizeMax
+                            filteredDataViewModel.filteredList.value.maxSize=sizeMax
                         },
                         label = { Text("Maximum size in sqft") }
                     )
-                    ElevatedButton( onClick = { },
+                    ElevatedButton( onClick = {AppRouter.navigateTo(Screen.FilteredScreen) },
                         contentPadding = PaddingValues(all = 10.dp),
                         modifier = Modifier
                             .padding(20.dp)
