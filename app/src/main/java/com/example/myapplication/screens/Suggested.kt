@@ -41,7 +41,7 @@ fun Suggested(preferenceViewModel: PreferenceViewModel=viewModel(),dataViewModel
     }
     for(l in myList){
         Log.d("ForLoop","$l")
-        if(l.price.length==0 || l.sqr_ft.length==0){
+        if(l.price.length==0 || l.sqr_ft.length==0 || tem.maxPrice.length==0 || tem.minPrice.length==0 || tem.minSize.length==0 || tem.maxSize.length==0){
             continue
         }
         if(l.price.toInt()>=tem.minPrice.toInt() && l.price.toInt()<=tem.maxPrice.toInt() && l.city==tem.location && l.sqr_ft.toInt()>=tem.minSize.toInt() && l.sqr_ft.toInt()<=tem.maxSize.toInt()){

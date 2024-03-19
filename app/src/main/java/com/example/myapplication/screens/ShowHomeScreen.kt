@@ -252,7 +252,7 @@ fun ApartmentItem(
                 ApartmentDetails(
                     name = homeDetails.description,
                     description = homeDetails.address,
-                    trainer = homeDetails.email,
+                    trainer = homeDetails.price,
                     phone=homeDetails.phone,
                     modifier.padding(0.dp)
                 )

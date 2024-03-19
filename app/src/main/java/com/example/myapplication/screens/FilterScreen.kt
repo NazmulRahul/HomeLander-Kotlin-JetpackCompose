@@ -116,6 +116,6 @@ fun FilterScreen(filteredDataViewModel: FilteredDataViewModel=viewModel()){
         }
     }
     SystemBackButtonHandler {
-        AppRouter.navigateTo(Screen.HomeScreen)
+        AppRouter.navigateTo(Screen.ShowHomeScreen)
     }
 }
