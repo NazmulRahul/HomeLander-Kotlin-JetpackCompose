@@ -27,7 +27,10 @@ fun FilteredScreen(dataViewModel:DataViewModel=viewModel(),filteredDataViewModel
     var newList=mutableListOf(AboutHome())
     for(l in myList){
         Log.d("ForLoop","$l")
-        if(l.price.length==0 || l.sqr_ft.length==0){
+        if(l.price.length==0 || l.sqr_ft.length==0||filteredDataViewModel.filteredList.value.minRent.length==0||
+            filteredDataViewModel.filteredList.value.maxRent.length==0||filteredDataViewModel.filteredList.value.minSize.length==0
+            ||filteredDataViewModel.filteredList.value.maxSize.length==0
+            ){
             continue
         }
         if(l.price.toInt()>=filteredDataViewModel.filteredList.value.minRent.toInt() && l.price.toInt()<=filteredDataViewModel.filteredList.value.maxRent.toInt() && l.city==filteredDataViewModel.filteredList.value.location && l.sqr_ft.toInt()>=filteredDataViewModel.filteredList.value.minSize.toInt() && l.sqr_ft.toInt()<=filteredDataViewModel.filteredList.value.maxSize.toInt()){
